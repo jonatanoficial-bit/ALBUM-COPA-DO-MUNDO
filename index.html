@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Álbum Virtual Brasil Pentacampeão 2026</title>
+  <meta name="description" content="Álbum virtual colecionável Brasil Pentacampeão 2026." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+  <div id="app-shell">
+    <header class="topbar">
+      <div>
+        <strong>Álbum Virtual</strong>
+        <span>Brasil Pentacampeão 2026</span>
+      </div>
+      <button id="btnReset" class="ghost-button" title="Resetar progresso">Resetar</button>
+    </header>
+
+    <main>
+      <section id="home" class="screen active">
+        <div class="hero-grid">
+          <div class="cover-card foil">
+            <img src="assets/images/capa/album-capa.webp" alt="Capa do Álbum Virtual Brasil Pentacampeão 2026" />
+          </div>
+          <div class="hero-copy">
+            <p class="eyebrow">Coleção Especial Digital</p>
+            <h1>FIFA World Cup 2026<br><span>Álbum Virtual Brasil Pentacampeão</span></h1>
+            <p class="lead">Build inicial jogável com capa, páginas do álbum, figurinhas, progresso salvo e sistema anti-quebra.</p>
+            <div class="hero-actions">
+              <button class="primary-button" data-go="album">Abrir Álbum</button>
+              <button class="secondary-button" data-go="packs">Abrir Pacote</button>
+            </div>
+            <div class="progress-card">
+              <div class="progress-label">
+                <span>Progresso geral</span>
+                <strong id="progressText">0/0</strong>
+              </div>
+              <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="album" class="screen">
+        <nav class="album-nav">
+          <button class="secondary-button" data-go="home">Voltar</button>
+          <h2>Meu Álbum</h2>
+          <button class="primary-button" data-go="packs">Abrir Pacote</button>
+        </nav>
+        <div id="sectionTabs" class="tabs"></div>
+        <div id="albumPages" class="album-pages"></div>
+      </section>
+
+      <section id="packs" class="screen">
+        <nav class="album-nav">
+          <button class="secondary-button" data-go="album">Voltar ao Álbum</button>
+          <h2>Pacotinhos</h2>
+          <button class="ghost-button" data-go="duplicates">Repetidas</button>
+        </nav>
+        <div class="pack-area">
+          <div class="pack-visual" id="packVisual">
+            <img src="assets/images/packs/pacote-comum.webp" alt="Pacote de figurinhas" />
+          </div>
+          <div class="pack-copy">
+            <h3>Abra um pacote grátis</h3>
+            <p>Cada pacote entrega 5 figurinhas. Nesta build inicial, o sistema já salva obtidas e repetidas no navegador.</p>
+            <button id="openPackBtn" class="primary-button big">Abrir pacote</button>
+          </div>
+        </div>
+        <div id="packResults" class="pack-results"></div>
+      </section>
+
+      <section id="duplicates" class="screen">
+        <nav class="album-nav">
+          <button class="secondary-button" data-go="packs">Voltar</button>
+          <h2>Figurinhas Repetidas</h2>
+          <button id="tradeDuplicatesBtn" class="primary-button">Trocar 5 por pacote</button>
+        </nav>
+        <p class="muted">Sistema base: a cada 5 repetidas, você recebe um pacote extra automaticamente ao trocar.</p>
+        <div id="duplicatesGrid" class="duplicates-grid"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span id="buildInfo">Build</span>
+      <span>Feito para GitHub Pages • HTML + CSS + JS</span>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/album.js"></script>
+  <script src="js/packs.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

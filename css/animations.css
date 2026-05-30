@@ -1,0 +1,8 @@
+.foil{position:relative;overflow:hidden}
+.foil:after{content:"";position:absolute;inset:-30%;background:linear-gradient(115deg,transparent 0 38%,rgba(255,255,255,.28) 46%,transparent 55% 100%);transform:translateX(-70%) rotate(8deg);animation:foilSweep 4s ease-in-out infinite;pointer-events:none}
+@keyframes foilSweep{0%,35%{transform:translateX(-78%) rotate(8deg)}70%,100%{transform:translateX(78%) rotate(8deg)}}
+.pack-visual.shake{animation:shake .55s ease both}
+@keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-3deg)}40%{transform:rotate(4deg)}60%{transform:rotate(-2deg)}80%{transform:rotate(2deg)}}
+@keyframes flipIn{from{opacity:0;transform:rotateY(90deg) translateY(12px)}to{opacity:1;transform:rotateY(0) translateY(0)}}
+.sticker-slot.owned.lendaria{box-shadow:0 0 0 1px rgba(255,232,120,.4),0 0 35px rgba(255,206,63,.2)}
+.sticker-slot.owned.ouro{box-shadow:0 0 0 1px rgba(255,206,63,.25)}

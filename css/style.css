@@ -1,0 +1,74 @@
+:root{
+  --bg:#06120f;
+  --panel:#0c1c1a;
+  --panel-2:#102a25;
+  --gold:#f3c85b;
+  --gold-2:#fff0a6;
+  --green:#0a7a42;
+  --blue:#073b78;
+  --text:#fff9e8;
+  --muted:#c6bea2;
+  --danger:#ff6b6b;
+  --shadow:0 24px 80px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at top,#12352f,#040b09 55%,#020403);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+button{font:inherit}
+#app-shell{min-height:100vh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px clamp(16px,4vw,42px);background:rgba(3,12,10,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(243,200,91,.25)}
+.topbar strong{display:block;font-size:1.05rem;letter-spacing:.04em}
+.topbar span{font-size:.78rem;color:var(--muted)}
+main{width:min(1180px,100%);margin:0 auto;flex:1;padding:clamp(18px,4vw,42px)}
+.screen{display:none}
+.screen.active{display:block}
+.hero-grid{display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:clamp(22px,5vw,70px);align-items:center}
+.cover-card{border-radius:30px;padding:8px;background:linear-gradient(135deg,#fff4aa,#018c52,#0c3d78,#f5c24d);box-shadow:var(--shadow);transform:perspective(1200px) rotateY(-5deg)}
+.cover-card img{display:block;width:100%;border-radius:22px}
+.hero-copy h1{font-size:clamp(2.2rem,6vw,5.2rem);line-height:.94;margin:0 0 18px;text-transform:uppercase;letter-spacing:-.05em}
+.hero-copy h1 span{color:var(--gold);text-shadow:0 0 28px rgba(243,200,91,.25)}
+.eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:800}
+.lead{max-width:650px;font-size:1.1rem;color:#e5dcc1;line-height:1.65}
+.hero-actions,.album-nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.primary-button,.secondary-button,.ghost-button{border:0;border-radius:999px;padding:13px 20px;cursor:pointer;font-weight:800;letter-spacing:.02em;transition:.2s transform,.2s filter}
+.primary-button{background:linear-gradient(135deg,var(--gold),#c88623);color:#101006;box-shadow:0 12px 34px rgba(243,200,91,.22)}
+.secondary-button{background:linear-gradient(135deg,#0c8047,#074b38);color:white;border:1px solid rgba(255,255,255,.15)}
+.ghost-button{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.12)}
+.primary-button:hover,.secondary-button:hover,.ghost-button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.big{font-size:1.1rem;padding:16px 26px}
+.progress-card{margin-top:26px;padding:18px;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+.progress-label{display:flex;justify-content:space-between;margin-bottom:10px;color:var(--muted)}
+.progress-track{height:12px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#0dbb68,var(--gold));transition:width .5s ease}
+.album-nav{justify-content:space-between;margin-bottom:22px}
+.album-nav h2{margin:0;font-size:clamp(1.6rem,4vw,2.6rem);color:var(--gold)}
+.tabs{display:flex;gap:10px;overflow:auto;padding:0 0 14px}
+.tab{white-space:nowrap;border:1px solid rgba(243,200,91,.25);background:rgba(255,255,255,.07);color:var(--text);border-radius:999px;padding:10px 14px;cursor:pointer}
+.tab.active{background:linear-gradient(135deg,var(--gold),#bd8123);color:#0b100e;font-weight:900}
+.album-page{display:none;background:linear-gradient(135deg,rgba(5,49,42,.92),rgba(8,18,31,.92));border:1px solid rgba(243,200,91,.24);border-radius:30px;padding:clamp(16px,3vw,30px);box-shadow:var(--shadow)}
+.album-page.active{display:block}
+.page-header{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;border-bottom:1px solid rgba(243,200,91,.22);padding-bottom:16px;margin-bottom:22px}
+.page-header h3{font-size:clamp(1.8rem,4vw,3.2rem);margin:0;color:var(--gold)}
+.page-header p{margin:6px 0 0;color:var(--muted)}
+.sticker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px}
+.sticker-slot{min-height:220px;border-radius:20px;padding:9px;background:rgba(255,255,255,.06);border:1px dashed rgba(243,200,91,.22);position:relative;overflow:hidden}
+.sticker-slot.owned{border-style:solid;background:rgba(255,255,255,.1)}
+.sticker-slot img{width:100%;height:190px;object-fit:cover;border-radius:14px;display:block;box-shadow:0 12px 26px rgba(0,0,0,.25)}
+.locked-card{height:190px;border-radius:14px;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));color:rgba(255,255,255,.52);font-weight:900}
+.sticker-name{font-size:.84rem;font-weight:900;margin-top:8px}
+.sticker-meta{font-size:.75rem;color:var(--muted)}
+.rarity{position:absolute;top:12px;right:12px;border-radius:999px;padding:4px 8px;font-size:.66rem;font-weight:900;background:#09130f;color:var(--gold);border:1px solid rgba(243,200,91,.3)}
+.pack-area{display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:32px;align-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(243,200,91,.22);border-radius:30px;padding:24px}
+.pack-visual img{width:100%;border-radius:28px;box-shadow:var(--shadow)}
+.pack-copy h3{font-size:clamp(2rem,5vw,4rem);line-height:.95;margin:0 0 16px;color:var(--gold)}
+.pack-copy p,.muted{color:var(--muted);line-height:1.6}
+.pack-results,.duplicates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;margin-top:24px}
+.result-card{animation:flipIn .45s ease both}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#09130f;color:white;border:1px solid rgba(243,200,91,.35);border-radius:999px;padding:12px 18px;box-shadow:var(--shadow);z-index:50}
+footer{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:14px clamp(16px,4vw,42px);border-top:1px solid rgba(243,200,91,.18);color:var(--muted);font-size:.82rem}
+@media(max-width:760px){
+  .hero-grid,.pack-area{grid-template-columns:1fr}
+  .cover-card{transform:none}
+  .page-header{display:block}
+  .topbar{align-items:flex-start}
+  .sticker-grid{grid-template-columns:repeat(2,1fr)}
+}
