@@ -4,40 +4,55 @@ const defaultState = {
   owned: [],
   duplicates: {},
   openedPacks: 0,
-  extraPacks: 0,
-  createdAt: new Date().toISOString()
+  bonusPacks: 0,
+  lastPack: [],
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString()
 };
+
+function safeClone(obj){
+  try { return structuredClone(obj); }
+  catch { return JSON.parse(JSON.stringify(obj)); }
+}
+
+function normalizeState(parsed){
+  const state = {
+    ...safeClone(defaultState),
+    ...(parsed && typeof parsed === "object" ? parsed : {})
+  };
+  state.owned = Array.isArray(state.owned) ? [...new Set(state.owned.filter(Boolean))] : [];
+  state.duplicates = state.duplicates && typeof state.duplicates === "object" ? state.duplicates : {};
+  state.openedPacks = Number.isFinite(Number(state.openedPacks)) ? Number(state.openedPacks) : 0;
+  state.bonusPacks = Number.isFinite(Number(state.bonusPacks)) ? Number(state.bonusPacks) : 0;
+  state.lastPack = Array.isArray(state.lastPack) ? state.lastPack : [];
+  return state;
+}
 
 function loadState(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return structuredClone(defaultState);
-    const parsed = JSON.parse(raw);
-    return {
-      ...structuredClone(defaultState),
-      ...parsed,
-      owned: Array.isArray(parsed.owned) ? parsed.owned : [],
-      duplicates: parsed.duplicates && typeof parsed.duplicates === "object" ? parsed.duplicates : {}
-    };
+    if(!raw) return safeClone(defaultState);
+    return normalizeState(JSON.parse(raw));
   }catch(err){
     console.warn("Falha ao carregar progresso. Usando estado padrão.", err);
-    return structuredClone(defaultState);
+    return safeClone(defaultState);
   }
 }
 
 function saveState(){
   try{
+    window.albumState.updatedAt = new Date().toISOString();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(window.albumState));
     return true;
   }catch(err){
     console.warn("Falha ao salvar progresso.", err);
-    showToast("Não foi possível salvar no navegador.");
+    if(typeof showToast === "function") showToast("Não foi possível salvar no navegador.");
     return false;
   }
 }
 
 function resetState(){
-  window.albumState = structuredClone(defaultState);
+  window.albumState = safeClone(defaultState);
   saveState();
   renderAll();
   showToast("Progresso resetado.");

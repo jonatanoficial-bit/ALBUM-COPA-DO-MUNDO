@@ -1,0 +1,27 @@
+MAPA DE ASSETS — BUILD v2.1.0
+
+Como inserir uma figurinha real:
+
+1. Abra o arquivo:
+   assets/docs/mapa-assets-v2.1.0.csv
+
+2. Escolha o jogador.
+
+3. Crie a imagem da figurinha no formato WEBP ou PNG.
+
+4. Salve exatamente no caminho indicado na coluna:
+   caminho_da_imagem
+
+5. Suba os arquivos no GitHub.
+
+O sistema anti-quebra funciona assim:
+- Se a imagem existir, o card mostra a imagem real.
+- Se a imagem não existir, o card mostra um placeholder premium.
+- Se o caminho estiver errado, o álbum não quebra.
+
+Recomendação de tamanho:
+- 768x1152 px ou 1024x1536 px
+- Proporção 2:3
+- WEBP para reduzir peso
+
+Data/hora da build: 30/05/2026 — 23h55

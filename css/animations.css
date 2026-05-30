@@ -1,8 +1,12 @@
+@keyframes screenIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .foil{position:relative;overflow:hidden}
-.foil:after{content:"";position:absolute;inset:-30%;background:linear-gradient(115deg,transparent 0 38%,rgba(255,255,255,.28) 46%,transparent 55% 100%);transform:translateX(-70%) rotate(8deg);animation:foilSweep 4s ease-in-out infinite;pointer-events:none}
+.foil:after{content:"";position:absolute;inset:-30%;background:linear-gradient(115deg,transparent 0 38%,rgba(255,255,255,.28) 46%,transparent 55% 100%);transform:translateX(-70%) rotate(8deg);animation:foilSweep 4.2s ease-in-out infinite;pointer-events:none}
 @keyframes foilSweep{0%,35%{transform:translateX(-78%) rotate(8deg)}70%,100%{transform:translateX(78%) rotate(8deg)}}
-.pack-visual.shake{animation:shake .55s ease both}
-@keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-3deg)}40%{transform:rotate(4deg)}60%{transform:rotate(-2deg)}80%{transform:rotate(2deg)}}
+.tilt-card{transition:transform .35s ease, filter .35s ease}.tilt-card:hover{transform:perspective(1200px) rotateY(-2deg) translateY(-4px);filter:brightness(1.04)}
+.pack-visual.shake{animation:shake .65s ease both}.pack-visual.opened{animation:packGlow 1s ease both}
+@keyframes shake{0%,100%{transform:rotate(0) scale(1)}15%{transform:rotate(-4deg) scale(1.02)}35%{transform:rotate(4deg) scale(1.04)}55%{transform:rotate(-2deg) scale(1.02)}75%{transform:rotate(2deg) scale(1.01)}}
+@keyframes packGlow{0%{box-shadow:0 0 0 rgba(244,202,90,0)}45%{box-shadow:0 0 50px rgba(244,202,90,.42)}100%{box-shadow:var(--shadow)}}
 @keyframes flipIn{from{opacity:0;transform:rotateY(90deg) translateY(12px)}to{opacity:1;transform:rotateY(0) translateY(0)}}
-.sticker-slot.owned.lendaria{box-shadow:0 0 0 1px rgba(255,232,120,.4),0 0 35px rgba(255,206,63,.2)}
-.sticker-slot.owned.ouro{box-shadow:0 0 0 1px rgba(255,206,63,.25)}
+.result-card{animation:flipIn .5s cubic-bezier(.2,.8,.2,1) both;transform-style:preserve-3d}.sticker-slot.owned.lendaria{box-shadow:0 0 0 1px rgba(255,232,120,.48),0 0 38px rgba(255,206,63,.22)}.sticker-slot.owned.ouro{box-shadow:0 0 0 1px rgba(255,206,63,.28),0 0 24px rgba(255,206,63,.12)}
+@keyframes packPop{0%{opacity:0;transform:scale(.82) rotate(-4deg)}45%{opacity:1;transform:scale(1.08) rotate(3deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@media (prefers-reduced-motion: reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

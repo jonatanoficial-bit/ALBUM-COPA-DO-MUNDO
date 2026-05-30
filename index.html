@@ -1,100 +1,159 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Álbum Virtual Brasil Pentacampeão 2026</title>
-  <meta name="description" content="Álbum virtual colecionável Brasil Pentacampeão 2026." />
+  <meta name="description" content="Álbum Virtual Brasil Pentacampeão 2026 — edição especial digital." />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/animations.css" />
 </head>
 <body>
-  <div id="app-shell">
-    <header class="topbar">
-      <div>
-        <strong>Álbum Virtual</strong>
-        <span>Brasil Pentacampeão 2026</span>
+  <div class="app-bg"></div>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-kicker">FIFA WORLD CUP 2026</span>
+      <strong>Álbum Virtual</strong>
+      <small>Brasil Pentacampeão 2026</small>
+    </div>
+    <nav class="nav">
+      <button data-view="home" class="nav-btn active">Início</button>
+      <button data-view="album" class="nav-btn">Álbum</button>
+      <button data-view="teams" class="nav-btn">Seleções 2026</button>
+      <button data-view="champions" class="nav-btn">Campeões</button>
+      <button data-view="packs" class="nav-btn">Pacotes</button>
+      <button data-view="duplicates" class="nav-btn">Repetidas</button>
+      <button data-view="assets" class="nav-btn">Assets</button>
+      <button data-view="backup" class="nav-btn">Backup</button>
+    </nav>
+    <button id="resetBtn" class="ghost-btn">Resetar</button>
+  </header>
+
+  <main>
+    <section id="homeView" class="view active hero">
+      <div class="cover-wrap tilt-card">
+        <img src="assets/images/capa/capa-album.png" alt="Capa do álbum" class="cover-img" />
+        <span class="shine"></span>
       </div>
-      <button id="btnReset" class="ghost-button" title="Resetar progresso">Resetar</button>
-    </header>
+      <div class="hero-copy">
+        <span class="eyebrow">Coleção especial digital</span>
+        <h1>FIFA WORLD CUP 2026<br><span>Brasil Pentacampeão</span></h1>
+        <p>Build v2.1 com suporte a imagens reais, mapa de assets, figurinhas especiais, busca, filtros, backup de progresso e base preparada para produção em lote.</p>
+        <div class="hero-actions">
+          <button class="primary-btn" data-view="album">Abrir Álbum</button>
+          <button class="secondary-btn" data-view="packs">Abrir Pacote</button>
+        </div>
+        <div class="progress-card">
+          <div class="progress-head"><span>Progresso geral</span><strong id="progressText">0/0 • 0%</strong></div>
+          <div class="bar"><span id="progressBar"></span></div>
+        </div>
+      </div>
+    </section>
 
-    <main>
-      <section id="home" class="screen active">
-        <div class="hero-grid">
-          <div class="cover-card foil">
-            <img src="assets/images/capa/album-capa.webp" alt="Capa do Álbum Virtual Brasil Pentacampeão 2026" />
-          </div>
-          <div class="hero-copy">
-            <p class="eyebrow">Coleção Especial Digital</p>
-            <h1>FIFA World Cup 2026<br><span>Álbum Virtual Brasil Pentacampeão</span></h1>
-            <p class="lead">Build inicial jogável com capa, páginas do álbum, figurinhas, progresso salvo e sistema anti-quebra.</p>
-            <div class="hero-actions">
-              <button class="primary-button" data-go="album">Abrir Álbum</button>
-              <button class="secondary-button" data-go="packs">Abrir Pacote</button>
-            </div>
-            <div class="progress-card">
-              <div class="progress-label">
-                <span>Progresso geral</span>
-                <strong id="progressText">0/0</strong>
-              </div>
-              <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
-            </div>
+    <section class="stats-grid">
+      <div><small>Total</small><strong id="totalCount">0</strong></div>
+      <div><small>Obtidas</small><strong id="ownedCount">0</strong></div>
+      <div><small>Repetidas</small><strong id="duplicateCount">0</strong></div>
+      <div><small>Pacotes</small><strong id="packCount">0</strong></div>
+      <div><small>Moedas</small><strong id="coinCount">0</strong></div>
+    </section>
+
+    <section id="albumView" class="view">
+      <div class="section-title">
+        <span>Álbum completo</span>
+        <h2>Meu Álbum</h2>
+        <p>Use a busca e os filtros para navegar entre jogadores, seleções campeãs e seleções atuais.</p>
+      </div>
+      <div class="filters premium-panel">
+        <input id="searchInput" type="search" placeholder="Buscar jogador ou seleção..." />
+        <select id="sectionFilter"><option value="all">Todas as páginas</option></select>
+        <select id="rarityFilter">
+          <option value="all">Todas raridades</option>
+          <option value="comum">Comum</option><option value="rara">Rara</option><option value="ouro">Ouro</option><option value="lendaria">Lendária</option>
+        </select>
+        <button id="clearFilters" class="ghost-btn">Limpar</button>
+      </div>
+      <div id="albumSections" class="album-sections"></div>
+    </section>
+
+    <section id="teamsView" class="view">
+      <div class="section-title">
+        <span>Copa 2026</span>
+        <h2>Seleções atuais</h2>
+        <p>Base editável com seleções e estrelas mundiais. Podemos expandir para 48 seleções e 26 jogadores por seleção nas próximas atualizações.</p>
+      </div>
+      <div id="teamsGrid" class="teams-grid"></div>
+    </section>
+
+    <section id="championsView" class="view">
+      <div class="section-title">
+        <span>Brasil Pentacampeão</span>
+        <h2>Galeria das Seleções Campeãs</h2>
+        <p>Resumo especial das cinco conquistas mundiais do Brasil dentro do álbum virtual.</p>
+      </div>
+      <div id="championTimeline" class="timeline"></div>
+    </section>
+
+    <section id="packsView" class="view">
+      <div class="pack-stage premium-panel">
+        <div class="pack-visual" id="packVisual">
+          <img src="assets/images/packs/pacote-ouro.svg" alt="Pacote de figurinhas">
+          <span class="pack-glow"></span>
+        </div>
+        <div class="pack-copy">
+          <span class="eyebrow">Pacote grátis</span>
+          <h2>Abra um pacote premium</h2>
+          <p>Cada pacote entrega 5 figurinhas. As repetidas viram moedas. A cada 5 repetidas, você troca por outro pacote.</p>
+          <div class="pack-actions">
+            <button id="openPackBtn" class="primary-btn big">Abrir pacote</button>
+            <button id="tradeBtn" class="secondary-btn">Trocar 5 repetidas</button>
           </div>
         </div>
-      </section>
+      </div>
+      <div id="packResult" class="pack-result"></div>
+    </section>
 
-      <section id="album" class="screen">
-        <nav class="album-nav">
-          <button class="secondary-button" data-go="home">Voltar</button>
-          <h2>Meu Álbum</h2>
-          <button class="primary-button" data-go="packs">Abrir Pacote</button>
-        </nav>
-        <div id="sectionTabs" class="tabs"></div>
-        <div id="albumPages" class="album-pages"></div>
-      </section>
+    <section id="duplicatesView" class="view">
+      <div class="section-title">
+        <span>Trocas e moedas</span>
+        <h2>Figurinhas repetidas</h2>
+      </div>
+      <div id="duplicatesList" class="duplicates-list"></div>
+    </section>
 
-      <section id="packs" class="screen">
-        <nav class="album-nav">
-          <button class="secondary-button" data-go="album">Voltar ao Álbum</button>
-          <h2>Pacotinhos</h2>
-          <button class="ghost-button" data-go="duplicates">Repetidas</button>
-        </nav>
-        <div class="pack-area">
-          <div class="pack-visual" id="packVisual">
-            <img src="assets/images/packs/pacote-comum.webp" alt="Pacote de figurinhas" />
-          </div>
-          <div class="pack-copy">
-            <h3>Abra um pacote grátis</h3>
-            <p>Cada pacote entrega 5 figurinhas. Nesta build inicial, o sistema já salva obtidas e repetidas no navegador.</p>
-            <button id="openPackBtn" class="primary-button big">Abrir pacote</button>
-          </div>
-        </div>
-        <div id="packResults" class="pack-results"></div>
-      </section>
+    <section id="assetsView" class="view">
+      <div class="section-title">
+        <span>Produção de imagens</span>
+        <h2>Mapa de Assets</h2>
+        <p>Esta página mostra os caminhos que o site espera para cada figurinha. Quando uma imagem existir na pasta indicada, ela aparece automaticamente no card. Quando não existir, o sistema usa o placeholder premium sem quebrar o álbum.</p>
+      </div>
+      <div class="asset-tools premium-panel">
+        <button id="copyAssetMapBtn" class="primary-btn">Gerar mapa de imagens</button>
+        <button id="downloadAssetMapBtn" class="secondary-btn">Baixar CSV</button>
+        <textarea id="assetMapBox" placeholder="Clique em gerar mapa para ver os caminhos das figurinhas."></textarea>
+      </div>
+    </section>
 
-      <section id="duplicates" class="screen">
-        <nav class="album-nav">
-          <button class="secondary-button" data-go="packs">Voltar</button>
-          <h2>Figurinhas Repetidas</h2>
-          <button id="tradeDuplicatesBtn" class="primary-button">Trocar 5 por pacote</button>
-        </nav>
-        <p class="muted">Sistema base: a cada 5 repetidas, você recebe um pacote extra automaticamente ao trocar.</p>
-        <div id="duplicatesGrid" class="duplicates-grid"></div>
-      </section>
-    </main>
+    <section id="backupView" class="view">
+      <div class="section-title">
+        <span>Sistema anti-quebra</span>
+        <h2>Backup do progresso</h2>
+        <p>Exporte seu progresso em texto e importe novamente se trocar de navegador ou publicar uma build nova.</p>
+      </div>
+      <div class="backup-panel premium-panel">
+        <button id="exportBtn" class="primary-btn">Exportar progresso</button>
+        <button id="importBtn" class="secondary-btn">Importar progresso</button>
+        <textarea id="backupBox" placeholder="O backup aparecerá aqui. Para importar, cole seu backup neste campo."></textarea>
+      </div>
+    </section>
+  </main>
 
-    <footer>
-      <span id="buildInfo">Build</span>
-      <span>Feito para GitHub Pages • HTML + CSS + JS</span>
-    </footer>
-  </div>
+  <footer>
+    <strong id="buildLabel">Build v2.1.0</strong>
+    <span> Sistema anti-quebra: imagens reais com fallback, dados isolados, filtros, mapa de assets e backup local.</span>
+  </footer>
 
-  <div id="toast" class="toast" hidden></div>
-
+  <div id="toast" class="toast" aria-live="polite"></div>
   <script src="js/data.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/album.js"></script>
-  <script src="js/packs.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

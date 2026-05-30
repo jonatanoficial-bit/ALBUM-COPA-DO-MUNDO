@@ -1,39 +1,40 @@
 # Álbum Virtual Brasil Pentacampeão 2026
 
-**Build v1.0.0 — Base jogável**  
-Data/hora visível no site: **30/05/2026 — 12:21**
+## Build v2.1.0 — Imagens Reais e Produção de Assets
 
-## O que esta build contém
+Data/hora visível no site: **30/05/2026 — 23h55**
 
-- Capa premium do álbum.
-- Tela inicial.
-- Páginas do álbum por seção.
-- 20 figurinhas de teste em WEBP.
-- Sistema de figurinhas bloqueadas e desbloqueadas.
-- Sistema inicial de pacotinhos.
-- 5 figurinhas por pacote.
-- Repetidas.
-- Troca de 5 repetidas por pacote bônus.
-- Progresso salvo no navegador com localStorage.
-- Botão para resetar progresso.
-- Tratamento básico para imagem quebrada.
-- Rodapé com versão, data e hora da build.
+### Novidades da v2.1.0
 
-## Como publicar no GitHub Pages
+- Suporte real a imagens de figurinhas.
+- Cada card agora pode carregar uma imagem `.webp`, `.png` ou `.jpg`.
+- Se a imagem não existir, o card usa placeholder e o álbum não quebra.
+- Nova aba **Assets**.
+- Mapa de imagens dentro do site.
+- Botão para gerar mapa de imagens.
+- Botão para baixar CSV com caminhos.
+- Arquivo pronto: `assets/docs/mapa-assets-v2.1.0.csv`.
+- Instruções: `assets/docs/COMO_INSERIR_FIGURINHAS.txt`.
+- Seção **Figurinhas Especiais** adicionada.
+- Cards especiais de demonstração incluídos quando disponíveis.
+- Backup, busca, filtros, pacotes, repetidas e moedas mantidos.
 
-1. Crie um repositório no GitHub.
-2. Envie todos os arquivos desta pasta para o repositório.
-3. Vá em **Settings > Pages**.
-4. Em **Build and deployment**, escolha a branch `main`.
-5. Salve e aguarde o link do GitHub Pages.
+### Como inserir imagens reais
 
-## Próximas builds planejadas
+1. Abra `assets/docs/mapa-assets-v2.1.0.csv`.
+2. Veja o caminho de cada jogador.
+3. Crie a imagem da figurinha.
+4. Salve no caminho indicado.
+5. Publique novamente no GitHub.
 
-- **v1.1**: sistema de pacotinhos mais avançado, limite diário e moedas.
-- **v1.2**: visual premium, animações melhores, sons opcionais e UX mobile.
-- **v1.3**: expansão Brasil Pentacampeão com páginas históricas completas.
-- **v2.0**: seleções atuais 2026, filtros, busca e expansão de conteúdo.
+### Sistema anti-quebra
 
-## Observação importante
+O álbum não quebra se uma imagem estiver faltando. Ele cai automaticamente no placeholder premium.
 
-Esta é uma edição digital conceitual para fins de protótipo. Para publicação pública, revise o uso de nomes, marcas, imagens de jogadores reais e logos oficiais.
+### Como publicar
+
+1. Extraia este ZIP.
+2. Envie todos os arquivos para o repositório.
+3. Confirme que `index.html` está na raiz.
+4. Ative o GitHub Pages em `Settings > Pages`.
+
