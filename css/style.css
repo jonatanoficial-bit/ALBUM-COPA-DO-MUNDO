@@ -186,7 +186,7 @@ h1 span{color:#fff}
 .stats-grid strong{font-size:28px;color:var(--gold)}
 .section-title{margin:28px 0 20px}
 .section-title h2{font-size:42px;margin:6px 0;color:#fff}
-.filters{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;padding:14px;margin:0 0 22px}
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:12px;padding:14px;margin:0 0 22px}
 .filters input,.filters select,.backup-panel textarea,.asset-tools textarea{
   width:100%;
   border:1px solid rgba(255,255,255,.18);
@@ -484,3 +484,6 @@ footer{padding:22px;text-align:center;color:var(--muted);border-top:1px solid va
   .home-mini-actions{display:none}
   .home-card{align-content:start}
 }
+
+/* Build v2.4.0 */
+.album-section h3::after{content:'';}

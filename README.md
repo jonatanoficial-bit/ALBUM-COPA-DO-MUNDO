@@ -1,35 +1,34 @@
 # Álbum Virtual Brasil Pentacampeão 2026
 
-## Build v2.3.0 — Mobile Fullscreen UX
+## Build v2.4.0 — Todos os jogadores Copa 2026: 48 seleções x 26 slots
 
 Data/hora visível no site: **30/05/2026 — 23h59**
 
-### O que foi corrigido nesta build
+### O que esta build faz
 
-- Tela inicial totalmente redesenhada.
-- Foco em **mobile-first**.
-- Uso de `100dvh` para ocupar melhor a tela real do navegador mobile.
-- Capa menor e com função visual, sem ocupar a tela toda sem propósito.
-- Botões principais logo na primeira dobra:
-  - Continuar álbum
-  - Abrir pacote
-- Progresso visível já na tela inicial.
-- Navegação inferior no celular, estilo aplicativo.
-- Header fixo mais compacto no mobile.
-- Melhor uso de espaço em telas pequenas.
-- Site continua abrindo bem no PC.
-- Mantidos: pacotes, repetidas, moedas, backup, admin, assets e fallback de imagens.
+- Implementa a opção B escolhida.
+- Cria **48 seleções da Copa 2026**.
+- Cada seleção tem **26 espaços de jogadores**.
+- Total: **1.248 slots** apenas da Copa 2026.
+- Mantém o Brasil Pentacampeão histórico.
+- Mantém figurinhas especiais.
+- Mantém pacotes, repetidas, moedas, backup, assets, admin e mobile fullscreen.
+- Adiciona filtro por confederação:
+  - CONMEBOL
+  - UEFA
+  - CAF
+  - AFC
+  - CONCACAF
+  - OFC
+- Jogadores sem confirmação aparecem como **Jogador XX — a confirmar**.
+- Caminhos de imagem já preparados para produção em lote.
 
-### Recomendação de teste
+### Mapa de assets
 
-1. Testar no PC.
-2. Testar no navegador mobile.
-3. Abrir a tela inicial.
-4. Verificar se os botões aparecem sem precisar rolar muito.
-5. Abrir Álbum, Pacotes, Seleções e Backup.
-6. Testar o site hospedado na Vercel ou GitHub Pages.
+Arquivo:
+`assets/docs/mapa-assets-v2.4.0.csv`
 
-### Próxima build recomendada
+### Próxima etapa recomendada
 
-**v2.4.0 — Polimento Mobile Final + PWA instalável**, para o usuário poder “instalar” o álbum como aplicativo no celular.
+**v2.5.0 — Atualização dos elencos oficiais confirmados por seleção**, começando por Brasil, Argentina, França, Portugal, Inglaterra, Espanha e Alemanha.
 

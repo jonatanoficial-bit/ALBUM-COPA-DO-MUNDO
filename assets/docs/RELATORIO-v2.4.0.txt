@@ -1,0 +1,24 @@
+BUILD v2.4.0 — TODOS OS JOGADORES COPA 2026
+
+Esta build implementa a opção B escolhida:
+- Todas as 48 seleções da Copa 2026 aparecem no álbum.
+- Cada seleção tem 26 espaços.
+- Total da seção Copa 2026: 1.248 slots.
+- Nomes já usados anteriormente foram preservados como base parcial.
+- Slots sem confirmação ficam como "Jogador XX — a confirmar".
+- Quando os elencos oficiais forem revisados, atualizamos somente o js/data.js e as imagens.
+
+Totais:
+- Seções: 54
+- Figurinhas totais: 1308
+- Slots Copa 2026: 1248
+- Brasil Pentacampeão histórico: 60
+- Especiais: 0
+
+Sistema anti-quebra:
+- Se a imagem não existir, aparece placeholder.
+- Se o nome ainda não estiver confirmado, aparece "a confirmar".
+- O álbum funciona mesmo sem assets reais.
+
+Build: v2.4.0
+Data/hora: 30/05/2026 — 23h59

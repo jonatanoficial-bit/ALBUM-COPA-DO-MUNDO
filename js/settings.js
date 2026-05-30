@@ -1,6 +1,6 @@
 const ALBUM_SETTINGS = {
   appName: "Álbum Virtual Brasil Pentacampeão 2026",
-  build: "v2.3.0",
+  build: "v2.4.0",
   buildDate: "30/05/2026",
   buildTime: "23h59",
   packSize: 5,

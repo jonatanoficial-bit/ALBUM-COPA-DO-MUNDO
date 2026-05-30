@@ -2,7 +2,7 @@
   const KEY = "albumBrasilPenta2026State";
   const defaultState = { owned: [], duplicates: {}, packsOpened: 0, coins: 0, dailyBonusDate: "", dailyBonusUsed: 0 };
   let state = loadState();
-  let filters = { search:"", section:"all", rarity:"all" };
+  let filters = { search:"", section:"all", rarity:"all", confed:"all" };
 
   function safeArray(x){ return Array.isArray(x) ? x : []; }
   function loadState(){
@@ -48,7 +48,7 @@
       <div class="sticker-top"><span>${sticker.number||"★"}</span><span class="rarity">${sticker.rarity||"comum"}</span></div>
       <div class="portrait ${sticker.image ? "has-image" : ""}">${imageHTML}</div>
       <div class="sticker-name">${locked?"Figurinha bloqueada":sticker.name}</div>
-      <div class="sticker-meta">${sticker.team} • ${sticker.position}</div>
+      <div class="sticker-meta">${sticker.team} • ${sticker.position}${sticker.status==="a-confirmar"?" • A confirmar":""}</div>
     </div>`;
     return div;
   }
@@ -57,6 +57,10 @@
     if(q && !(`${sticker.name} ${sticker.team} ${sticker.position}`.toLowerCase().includes(q))) return false;
     if(filters.section !== "all" && sticker.section !== filters.section) return false;
     if(filters.rarity !== "all" && sticker.rarity !== filters.rarity) return false;
+    if(filters.confed !== "all"){
+      const sec = SECTIONS.find(x => x.id === sticker.section);
+      if(!sec || sec.confed !== filters.confed) return false;
+    }
     return true;
   }
   function renderAlbum(){
@@ -231,7 +235,8 @@
     $("searchInput").addEventListener("input",e=>{filters.search=e.target.value;renderAlbum();});
     $("sectionFilter").addEventListener("change",e=>{filters.section=e.target.value;renderAlbum();});
     $("rarityFilter").addEventListener("change",e=>{filters.rarity=e.target.value;renderAlbum();});
-    $("clearFilters").addEventListener("click",()=>{filters={search:"",section:"all",rarity:"all"};$("searchInput").value="";$("sectionFilter").value="all";$("rarityFilter").value="all";renderAlbum();});
+    const confedFilter=$("confedFilter"); if(confedFilter) confedFilter.addEventListener("change",e=>{filters.confed=e.target.value;renderAlbum();});
+    $("clearFilters").addEventListener("click",()=>{filters={search:"",section:"all",rarity:"all",confed:"all"};$("searchInput").value="";$("sectionFilter").value="all";$("rarityFilter").value="all"; const cf=$("confedFilter"); if(cf) cf.value="all"; renderAlbum();});
     $("exportBtn").addEventListener("click",()=>{$("backupBox").value=btoa(unescape(encodeURIComponent(JSON.stringify(state))));showToast("Backup exportado.");});
     $("importBtn").addEventListener("click",()=>{try{const imported=JSON.parse(decodeURIComponent(escape(atob($("backupBox").value.trim()))));state={...defaultState,...imported,owned:safeArray(imported.owned).filter(id=>STICKERS.some(s=>s.id===id))};saveState();renderAll();showToast("Backup importado.");}catch(e){showToast("Backup inválido.");}});
     const mapBtn = $("copyAssetMapBtn"); if(mapBtn) mapBtn.addEventListener("click", showAssetMap);
