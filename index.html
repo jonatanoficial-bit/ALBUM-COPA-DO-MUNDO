@@ -23,28 +23,40 @@
       <button data-view="packs" class="nav-btn">Pacotes</button>
       <button data-view="duplicates" class="nav-btn">Repetidas</button>
       <button data-view="assets" class="nav-btn">Assets</button>
+      <button data-view="admin" class="nav-btn">Admin</button>
       <button data-view="backup" class="nav-btn">Backup</button>
     </nav>
     <button id="resetBtn" class="ghost-btn">Resetar</button>
   </header>
 
   <main>
-    <section id="homeView" class="view active hero">
-      <div class="cover-wrap tilt-card">
-        <img src="assets/images/capa/capa-album.png" alt="Capa do álbum" class="cover-img" />
-        <span class="shine"></span>
-      </div>
-      <div class="hero-copy">
-        <span class="eyebrow">Coleção especial digital</span>
-        <h1>FIFA WORLD CUP 2026<br><span>Brasil Pentacampeão</span></h1>
-        <p>Build v2.1 com suporte a imagens reais, mapa de assets, figurinhas especiais, busca, filtros, backup de progresso e base preparada para produção em lote.</p>
-        <div class="hero-actions">
-          <button class="primary-btn" data-view="album">Abrir Álbum</button>
-          <button class="secondary-btn" data-view="packs">Abrir Pacote</button>
+    <section id="homeView" class="view active home-screen">
+      <div class="home-card">
+        <div class="home-cover tilt-card">
+          <img src="assets/images/capa/capa-album.png" alt="Capa do álbum" class="cover-img" />
+          <span class="shine"></span>
         </div>
-        <div class="progress-card">
-          <div class="progress-head"><span>Progresso geral</span><strong id="progressText">0/0 • 0%</strong></div>
-          <div class="bar"><span id="progressBar"></span></div>
+
+        <div class="home-content">
+          <span class="eyebrow">Coleção especial digital</span>
+          <h1>Brasil Pentacampeão<br><span>Álbum Virtual 2026</span></h1>
+          <p class="home-subtitle">Colecione as seleções campeãs do Brasil, abra pacotes e complete o álbum especial.</p>
+
+          <div class="quick-progress">
+            <div class="progress-head"><span>Seu progresso</span><strong id="progressText">0/0 • 0%</strong></div>
+            <div class="bar"><span id="progressBar"></span></div>
+          </div>
+
+          <div class="home-actions">
+            <button class="primary-btn big" data-view="album">Continuar álbum</button>
+            <button class="secondary-btn big" data-view="packs">Abrir pacote</button>
+          </div>
+
+          <div class="home-mini-actions">
+            <button data-view="teams">Seleções 2026</button>
+            <button data-view="champions">Campeões</button>
+            <button data-view="backup">Backup</button>
+          </div>
         </div>
       </div>
     </section>
@@ -55,6 +67,7 @@
       <div><small>Repetidas</small><strong id="duplicateCount">0</strong></div>
       <div><small>Pacotes</small><strong id="packCount">0</strong></div>
       <div><small>Moedas</small><strong id="coinCount">0</strong></div>
+      <div><small>Completar</small><strong id="missingCount">0</strong></div>
     </section>
 
     <section id="albumView" class="view">
@@ -105,8 +118,10 @@
           <p>Cada pacote entrega 5 figurinhas. As repetidas viram moedas. A cada 5 repetidas, você troca por outro pacote.</p>
           <div class="pack-actions">
             <button id="openPackBtn" class="primary-btn big">Abrir pacote</button>
+            <button id="dailyBonusBtn" class="secondary-btn">Resgatar bônus diário</button>
             <button id="tradeBtn" class="secondary-btn">Trocar 5 repetidas</button>
           </div>
+          <p class="asset-note" id="dailyBonusNote">Bônus diário: 3 pacotes grátis por dia neste navegador.</p>
         </div>
       </div>
       <div id="packResult" class="pack-result"></div>
@@ -133,6 +148,40 @@
       </div>
     </section>
 
+    <section id="adminView" class="view">
+      <div class="section-title">
+        <span>Modo produção</span>
+        <h2>Administração Local</h2>
+        <p>Ferramentas para acompanhar a produção do álbum, verificar imagens faltantes, simular coleção completa e preparar a próxima etapa.</p>
+      </div>
+      <div class="admin-grid">
+        <div class="premium-panel admin-card">
+          <h3>Status de Produção</h3>
+          <p id="productionStatus">Carregando status...</p>
+          <button id="checkImagesBtn" class="primary-btn">Verificar imagens</button>
+        </div>
+        <div class="premium-panel admin-card">
+          <h3>Modo Teste</h3>
+          <p>Use apenas para testar o visual do álbum completo.</p>
+          <button id="unlockAllBtn" class="secondary-btn">Liberar todas</button>
+          <button id="lockAllBtn" class="ghost-btn">Bloquear todas</button>
+        </div>
+        <div class="premium-panel admin-card">
+          <h3>Checklist da Próxima Fase</h3>
+          <ul class="checklist">
+            <li>Gerar figurinhas reais em WEBP.</li>
+            <li>Substituir placeholders nos caminhos do CSV.</li>
+            <li>Conferir nomes, posições e numeração.</li>
+            <li>Testar pacotes e progresso antes de publicar.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="premium-panel asset-report">
+        <h3>Relatório de imagens</h3>
+        <div id="imageReport">Clique em verificar imagens.</div>
+      </div>
+    </section>
+
     <section id="backupView" class="view">
       <div class="section-title">
         <span>Sistema anti-quebra</span>
@@ -148,11 +197,12 @@
   </main>
 
   <footer>
-    <strong id="buildLabel">Build v2.1.0</strong>
-    <span> Sistema anti-quebra: imagens reais com fallback, dados isolados, filtros, mapa de assets e backup local.</span>
+    <strong id="buildLabel">Build v2.3.0</strong>
+    <span> Sistema anti-quebra: mobile fullscreen, imagens com fallback, bônus diário, backup, admin local e checklist.</span>
   </footer>
 
   <div id="toast" class="toast" aria-live="polite"></div>
+  <script src="js/settings.js"></script>
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
 </body>

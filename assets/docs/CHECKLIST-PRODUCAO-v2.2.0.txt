@@ -1,0 +1,36 @@
+CHECKLIST DE PRODUÇÃO — BUILD v2.2.0
+
+1. Publicar a build no GitHub Pages.
+2. Testar:
+   - Início
+   - Álbum
+   - Seleções 2026
+   - Campeões
+   - Pacotes
+   - Repetidas
+   - Assets
+   - Admin
+   - Backup
+
+3. Abrir pacote 3 vezes.
+4. Testar bônus diário.
+5. Testar filtros:
+   - nome de jogador
+   - seleção
+   - raridade
+
+6. Testar backup:
+   - Exportar
+   - Resetar
+   - Importar
+
+7. Produção de imagens:
+   - Usar mapa CSV em assets/docs/mapa-assets-v2.1.0.csv
+   - Criar figurinhas em WEBP 768x1152 ou 1024x1536
+   - Salvar nos caminhos indicados
+
+8. Próxima build recomendada:
+   v2.3.0 — Inserção em lote das primeiras figurinhas reais do Brasil Pentacampeão.
+
+Build: v2.2.0
+Data/hora: 30/05/2026 — 23h59

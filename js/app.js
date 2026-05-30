@@ -1,6 +1,6 @@
 (function(){
   const KEY = "albumBrasilPenta2026State";
-  const defaultState = { owned: [], duplicates: {}, packsOpened: 0, coins: 0 };
+  const defaultState = { owned: [], duplicates: {}, packsOpened: 0, coins: 0, dailyBonusDate: "", dailyBonusUsed: 0 };
   let state = loadState();
   let filters = { search:"", section:"all", rarity:"all" };
 
@@ -14,7 +14,9 @@
         owned: safeArray(parsed.owned).filter(id => STICKERS.some(s => s.id === id)),
         duplicates: parsed.duplicates && typeof parsed.duplicates === "object" ? parsed.duplicates : {},
         packsOpened: Number(parsed.packsOpened || 0),
-        coins: Number(parsed.coins || 0)
+        coins: Number(parsed.coins || 0),
+        dailyBonusDate: String(parsed.dailyBonusDate || ""),
+        dailyBonusUsed: Number(parsed.dailyBonusUsed || 0)
       };
     }catch(e){ return {...defaultState}; }
   }
@@ -99,7 +101,7 @@
   function weightedPool(){
     const pool=[]; STICKERS.forEach(s=>{let w=10;if(s.rarity==="rara")w=6;if(s.rarity==="ouro")w=3;if(s.rarity==="lendaria")w=1;for(let i=0;i<w;i++)pool.push(s);}); return pool;
   }
-  function drawPack(){const pool=weightedPool(); return Array.from({length:5},()=>pool[Math.floor(Math.random()*pool.length)]);}
+  function drawPack(){const pool=weightedPool(); return Array.from({length:(window.ALBUM_SETTINGS?.packSize || 5)},()=>pool[Math.floor(Math.random()*pool.length)]);}
   function openPack(){
     const visual=$("packVisual"); visual.classList.add("opening"); setTimeout(()=>visual.classList.remove("opening"),1600);
     const result=drawPack(); const resultWrap=$("packResult"); resultWrap.innerHTML=""; let newCount=0;
@@ -107,8 +109,8 @@
     state.packsOpened += 1; saveState(); renderAll(); setView("packs"); showToast(newCount?`Pacote aberto: ${newCount} nova(s)!`:"Pacote aberto: todas repetidas!");
   }
   function tradeDuplicates(){
-    if(dupTotal()<5){showToast("Você precisa de 5 repetidas para trocar por pacote.");return;}
-    let need=5; for(const id of Object.keys(state.duplicates)){if(need<=0)break; const take=Math.min(need,Number(state.duplicates[id]||0)); state.duplicates[id]-=take; need-=take; if(state.duplicates[id]<=0)delete state.duplicates[id];}
+    const tradeCost = window.ALBUM_SETTINGS?.tradeDuplicatesCost || 5; if(dupTotal()<tradeCost){showToast(`Você precisa de ${tradeCost} repetidas para trocar por pacote.`);return;}
+    let need=tradeCost; for(const id of Object.keys(state.duplicates)){if(need<=0)break; const take=Math.min(need,Number(state.duplicates[id]||0)); state.duplicates[id]-=take; need-=take; if(state.duplicates[id]<=0)delete state.duplicates[id];}
     saveState(); showToast("Troca feita! Abrindo pacote bônus..."); setTimeout(openPack,550);
   }
   function renderDuplicates(){
@@ -119,7 +121,7 @@
   }
   function updateStats(){
     const total=STICKERS.length, owned=state.owned.length, pct=total?Math.round((owned/total)*100):0;
-    $("totalCount").textContent=total;$("ownedCount").textContent=owned;$("duplicateCount").textContent=dupTotal();$("packCount").textContent=state.packsOpened;$("coinCount").textContent=state.coins;
+    $("totalCount").textContent=total;$("ownedCount").textContent=owned;$("duplicateCount").textContent=dupTotal();$("packCount").textContent=state.packsOpened;$("coinCount").textContent=state.coins; const missingEl=$("missingCount"); if(missingEl) missingEl.textContent=Math.max(0,total-owned);
     $("progressText").textContent=`${owned}/${total} • ${pct}%`;$("progressBar").style.width=pct+"%";$("buildLabel").textContent=BUILD_INFO.label;
   }
   function populateFilters(){
@@ -153,10 +155,79 @@
     showToast("CSV baixado.");
   }
 
-  function renderAll(){renderAlbum();renderTeams();renderChampions();renderDuplicates();updateStats();}
+
+  function todayKey(){
+    return new Date().toISOString().slice(0,10);
+  }
+  function normalizeDaily(){
+    const today = todayKey();
+    if(state.dailyBonusDate !== today){
+      state.dailyBonusDate = today;
+      state.dailyBonusUsed = 0;
+      saveState();
+    }
+  }
+  function updateDailyNote(){
+    const note = $("dailyBonusNote");
+    if(!note) return;
+    normalizeDaily();
+    const limit = window.ALBUM_SETTINGS?.dailyBonusPacks || 3;
+    const left = Math.max(0, limit - Number(state.dailyBonusUsed || 0));
+    note.innerHTML = `<span class="daily-badge">Bônus diário: ${left}/${limit} pacote(s) disponíveis hoje</span>`;
+  }
+  function claimDailyBonus(){
+    normalizeDaily();
+    const limit = window.ALBUM_SETTINGS?.dailyBonusPacks || 3;
+    if(Number(state.dailyBonusUsed || 0) >= limit){
+      showToast("Bônus diário esgotado. Volte amanhã.");
+      updateDailyNote();
+      return;
+    }
+    state.dailyBonusUsed = Number(state.dailyBonusUsed || 0) + 1;
+    saveState();
+    updateDailyNote();
+    showToast("Bônus diário resgatado! Abrindo pacote...");
+    setTimeout(openPack, 500);
+  }
+  function unlockAll(){
+    state.owned = STICKERS.map(s => s.id);
+    saveState();
+    renderAll();
+    showToast("Modo teste: álbum completo liberado.");
+  }
+  function lockAll(){
+    state.owned = [];
+    state.duplicates = {};
+    saveState();
+    renderAll();
+    showToast("Modo teste: álbum bloqueado.");
+  }
+  function imageReport(){
+    const withImage = STICKERS.filter(s => s.image).length;
+    const specialReal = STICKERS.filter(s => s.image && s.section === "especiais").length;
+    const total = STICKERS.length;
+    const report = $("imageReport");
+    const prod = $("productionStatus");
+    const html = `<div class="report-grid">
+      <div class="report-box"><small>Total de figurinhas</small><strong>${total}</strong></div>
+      <div class="report-box"><small>Com caminho de imagem</small><strong>${withImage}</strong></div>
+      <div class="report-box"><small>Cards especiais</small><strong>${specialReal}</strong></div>
+      <div class="report-box"><small>Fallback ativo</small><strong>SIM</strong></div>
+    </div>
+    <p class="asset-note">A verificação no GitHub Pages é feita pelo carregamento natural: se o arquivo não existir, o card troca automaticamente para placeholder. Para produção, use o CSV da aba Assets.</p>`;
+    if(report) report.innerHTML = html;
+    if(prod) prod.textContent = `${total} figurinhas cadastradas. ${withImage} com caminhos de imagem preparados. Sistema de fallback ativo.`;
+    showToast("Relatório atualizado.");
+  }
+
+  function renderAll(){renderAlbum();renderTeams();renderChampions();renderDuplicates();updateStats();updateDailyNote();imageReport();}
   function initEvents(){
     document.querySelectorAll("[data-view]").forEach(btn=>btn.addEventListener("click",()=>setView(btn.dataset.view)));
     $("openPackBtn").addEventListener("click",openPack); $("tradeBtn").addEventListener("click",tradeDuplicates);
+    const dailyBtn=$("dailyBonusBtn"); if(dailyBtn) dailyBtn.addEventListener("click", claimDailyBonus);
+    const unlockBtn=$("unlockAllBtn"); if(unlockBtn) unlockBtn.addEventListener("click", unlockAll);
+    const lockBtn=$("lockAllBtn"); if(lockBtn) lockBtn.addEventListener("click", lockAll);
+    const checkBtn=$("checkImagesBtn"); if(checkBtn) checkBtn.addEventListener("click", imageReport);
     $("searchInput").addEventListener("input",e=>{filters.search=e.target.value;renderAlbum();});
     $("sectionFilter").addEventListener("change",e=>{filters.section=e.target.value;renderAlbum();});
     $("rarityFilter").addEventListener("change",e=>{filters.rarity=e.target.value;renderAlbum();});
@@ -165,7 +236,7 @@
     $("importBtn").addEventListener("click",()=>{try{const imported=JSON.parse(decodeURIComponent(escape(atob($("backupBox").value.trim()))));state={...defaultState,...imported,owned:safeArray(imported.owned).filter(id=>STICKERS.some(s=>s.id===id))};saveState();renderAll();showToast("Backup importado.");}catch(e){showToast("Backup inválido.");}});
     const mapBtn = $("copyAssetMapBtn"); if(mapBtn) mapBtn.addEventListener("click", showAssetMap);
     const csvBtn = $("downloadAssetMapBtn"); if(csvBtn) csvBtn.addEventListener("click", downloadAssetMap);
-    $("resetBtn").addEventListener("click",()=>{if(confirm("Resetar todo o progresso?")){state={...defaultState,owned:[],duplicates:{},packsOpened:0,coins:0};saveState();renderAll();showToast("Progresso resetado.");}});
+    $("resetBtn").addEventListener("click",()=>{if(confirm("Resetar todo o progresso?")){state={...defaultState,owned:[],duplicates:{},packsOpened:0,coins:0,dailyBonusDate:"",dailyBonusUsed:0};saveState();renderAll();showToast("Progresso resetado.");}});
     document.querySelectorAll(".tilt-card").forEach(card=>{card.addEventListener("mousemove",e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`rotateY(${x*8}deg) rotateX(${-y*8}deg)`;});card.addEventListener("mouseleave",()=>card.style.transform="");});
   }
   function seedInitialIfEmpty(){ if(state.owned.length===0 && state.packsOpened===0){state.owned=STICKERS.slice(0,10).map(s=>s.id);saveState();} }

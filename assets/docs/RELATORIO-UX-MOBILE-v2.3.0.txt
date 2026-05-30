@@ -1,0 +1,23 @@
+RELATÓRIO UX MOBILE — BUILD v2.3.0
+
+Avaliação feita com base nos prints enviados:
+
+Problemas identificados:
+1. Tela inicial parecia landing page e não app.
+2. Capa muito grande, especialmente no mobile.
+3. Usuário precisava rolar antes de entender o objetivo.
+4. Pouca prioridade para ações principais.
+5. A navegação superior ficava pesada para celular.
+
+Correções aplicadas:
+1. Home redesenhada como tela de app.
+2. Capa reduzida e centralizada.
+3. Progresso inserido na primeira tela.
+4. Botões principais destacados.
+5. Navegação inferior horizontal no mobile.
+6. Uso de 100dvh para melhor fullscreen no navegador.
+7. Header mobile compacto.
+8. Layout PC preservado.
+
+Build: v2.3.0
+Data/hora: 30/05/2026 — 23h59

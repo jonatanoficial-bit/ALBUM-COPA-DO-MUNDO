@@ -1,40 +1,35 @@
 # Álbum Virtual Brasil Pentacampeão 2026
 
-## Build v2.1.0 — Imagens Reais e Produção de Assets
+## Build v2.3.0 — Mobile Fullscreen UX
 
-Data/hora visível no site: **30/05/2026 — 23h55**
+Data/hora visível no site: **30/05/2026 — 23h59**
 
-### Novidades da v2.1.0
+### O que foi corrigido nesta build
 
-- Suporte real a imagens de figurinhas.
-- Cada card agora pode carregar uma imagem `.webp`, `.png` ou `.jpg`.
-- Se a imagem não existir, o card usa placeholder e o álbum não quebra.
-- Nova aba **Assets**.
-- Mapa de imagens dentro do site.
-- Botão para gerar mapa de imagens.
-- Botão para baixar CSV com caminhos.
-- Arquivo pronto: `assets/docs/mapa-assets-v2.1.0.csv`.
-- Instruções: `assets/docs/COMO_INSERIR_FIGURINHAS.txt`.
-- Seção **Figurinhas Especiais** adicionada.
-- Cards especiais de demonstração incluídos quando disponíveis.
-- Backup, busca, filtros, pacotes, repetidas e moedas mantidos.
+- Tela inicial totalmente redesenhada.
+- Foco em **mobile-first**.
+- Uso de `100dvh` para ocupar melhor a tela real do navegador mobile.
+- Capa menor e com função visual, sem ocupar a tela toda sem propósito.
+- Botões principais logo na primeira dobra:
+  - Continuar álbum
+  - Abrir pacote
+- Progresso visível já na tela inicial.
+- Navegação inferior no celular, estilo aplicativo.
+- Header fixo mais compacto no mobile.
+- Melhor uso de espaço em telas pequenas.
+- Site continua abrindo bem no PC.
+- Mantidos: pacotes, repetidas, moedas, backup, admin, assets e fallback de imagens.
 
-### Como inserir imagens reais
+### Recomendação de teste
 
-1. Abra `assets/docs/mapa-assets-v2.1.0.csv`.
-2. Veja o caminho de cada jogador.
-3. Crie a imagem da figurinha.
-4. Salve no caminho indicado.
-5. Publique novamente no GitHub.
+1. Testar no PC.
+2. Testar no navegador mobile.
+3. Abrir a tela inicial.
+4. Verificar se os botões aparecem sem precisar rolar muito.
+5. Abrir Álbum, Pacotes, Seleções e Backup.
+6. Testar o site hospedado na Vercel ou GitHub Pages.
 
-### Sistema anti-quebra
+### Próxima build recomendada
 
-O álbum não quebra se uma imagem estiver faltando. Ele cai automaticamente no placeholder premium.
-
-### Como publicar
-
-1. Extraia este ZIP.
-2. Envie todos os arquivos para o repositório.
-3. Confirme que `index.html` está na raiz.
-4. Ative o GitHub Pages em `Settings > Pages`.
+**v2.4.0 — Polimento Mobile Final + PWA instalável**, para o usuário poder “instalar” o álbum como aplicativo no celular.
 

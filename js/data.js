@@ -1,9 +1,9 @@
 const BUILD_INFO = {
-  "version": "v2.1.0",
-  "name": "Imagens Reais e Produção de Assets",
+  "version": "v2.3.0",
+  "name": "Mobile Fullscreen UX",
   "date": "30/05/2026",
-  "time": "23h55",
-  "label": "Build v2.1.0 — 30/05/2026 — 23h55"
+  "time": "23h59",
+  "label": "Build v2.3.0 — 30/05/2026 — 23h59"
 };
 
 const SECTIONS = [
