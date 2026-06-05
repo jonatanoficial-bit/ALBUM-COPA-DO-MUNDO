@@ -1,0 +1,16 @@
+BUILD v2.4.1 — IMAGENS ORGANIZADAS
+
+Imagens recebidas: 27
+Figurinhas únicas conectadas ao álbum: 22
+Arquivos removidos por repetição/versão alternativa: 5
+
+REMOVIDOS:
+- índice 8: duplicata exata de Jorginho
+- índice 9: duplicata exata de Jorginho
+- índice 10: segunda versão de Branco; removida para manter apenas uma
+- índice 15: duplicata exata de Raí
+- índice 17: segunda versão de Zinho; removida para manter apenas uma
+
+OBSERVAÇÃO: a imagem de Mazinho foi conectada ao slot oficial do álbum, porém o card enviado exibe camisa 10; o cadastro do álbum permanece com camisa 17. Recomenda-se corrigir essa arte futuramente.
+
+Todos os arquivos selecionados foram convertidos para WEBP e colocados exatamente nos caminhos definidos pelo js/data.js.
