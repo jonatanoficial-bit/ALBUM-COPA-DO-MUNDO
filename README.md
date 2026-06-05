@@ -1,5 +1,17 @@
 # Álbum Virtual Brasil Pentacampeão 2026
 
+## Build v2.4.1 — Assets reais organizados
+
+- 22 figurinhas únicas conectadas ao álbum.
+- Duplicatas removidas.
+- Imagens convertidas para WEBP.
+- Nomes e caminhos ajustados exatamente ao `js/data.js`.
+- Basta publicar todo o conteúdo desta pasta no GitHub Pages.
+
+Veja `assets/docs/RELATORIO-ORGANIZACAO-v2.4.1.txt`.
+
+# Álbum Virtual Brasil Pentacampeão 2026
+
 ## Build v2.4.0 — Todos os jogadores Copa 2026: 48 seleções x 26 slots
 
 Data/hora visível no site: **30/05/2026 — 23h59**

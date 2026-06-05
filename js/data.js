@@ -1,9 +1,9 @@
 const BUILD_INFO = {
-  "version": "v2.4.0",
-  "name": "Todos os jogadores Copa 2026 — slots completos",
-  "date": "30/05/2026",
-  "time": "23h59",
-  "label": "Build v2.4.0 — 30/05/2026 — 23h59"
+  "version": "v2.4.1",
+  "name": "Assets reais organizados",
+  "date": "02/06/2026",
+  "time": "18h00",
+  "label": "Build v2.4.1 — 02/06/2026 — 18h00"
 };
 
 const SECTIONS = [
